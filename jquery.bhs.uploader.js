@@ -193,7 +193,7 @@
 						data: data,
 					},
 					success: function (data) {
-						$.userdata[0].filename =  data;
+						$.userdata[0].response =  data;
 						console.log(resp.fileinfo);
 						$.grep(resp.fileinfo, function(e,i){ 
 							if(e.handle == fileHandle)
