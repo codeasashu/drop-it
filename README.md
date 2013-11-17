@@ -88,8 +88,8 @@ file were just pulled away from dropped region without being dropped.
 `````javascript
   $('#drop-target').bhs_uploader({
           onDragLeave : function(){
-					    console.log('File are now over the droppable region');
-					//This will continue to output till you pull the file away from droppable region
+					    console.log('File are now leaving the droppable region');
+					//This will output when you pull the file away from droppable region
 				}
 			}); 
 `````
@@ -198,15 +198,15 @@ Example-
           onDragOver : function(){
 					  console.log('file is over the drag area');
 				  },
-				  onDragLeave : function(){
+	  onDragLeave : function(){
 					  console.log('file left the drag area');
 				  },
-				  preview: function(data){
-				    console.log(data);
+	  preview: function(data){
+				    	  console.log(data);
 				  },
           error : function(response){   
-					    console.log(response);
-					   //This will print error in each line
+					  console.log(response);
+					  //This will print error in each line
 				}
 			}); 
 `````
@@ -239,10 +239,12 @@ The minimal usage is:
 > appealing to use `data('bhs_uploader')` instead of just `bhs_uploader` .
 > But does that make any difference?
 
+### file: 
 The file argument let you to mention the file which will handle the uploads.
-> Don't forget to mention path of you have file at any other location than the same directory from which you are
+> Don't forget to mention the path, if you have file at any other location than the same directory from which you are
 > running this code. Example- `file: '/path/to/file/upload-handler.php'`
 
+### progress: 
 Apart from this, it also provides option to monitor progress of each files that are currently in the dropped area.
 This option utilizes the same `data` array you have obtained previously in preview option.
 It just adds a array `progress` to `data` by which you can monitor which file is under progress currently and what the
@@ -278,11 +280,11 @@ var arg = {
         console.log('Current file\'s handle: '+data[0].handle);
         console.log('Current file\'s progress: '+ data.progress); //Note here the use of *data* not *data[0]*
         //Now we have the handle, you can apply the progress to the particular file as
-        $('.file-selector['data-handle='+data[0].handle+']').html('<p>This file got'+data.progress+' % progresses');
+        $('.file-selector[data-handle='+data[0].handle+']').html('<p>This file got'+data.progress+' % progresses');
     },
     done: function(response){
       //data[0] will hold details of each completed files
-      //data[0].respon
+      //data[0].response;
       console.log('File just uploaded: '+data[0].name);
       console.log('File\'s handle: '+data[0].handle);
       console.log('File\'s response from backend: '+data[0].response);
