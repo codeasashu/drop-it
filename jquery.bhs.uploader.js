@@ -98,33 +98,43 @@
 			return text;
 		}
 		
+		createWriter = function(files){
+			for (var i = 0, file; file = files[i]; i++) {
+				if(base.isImage(file)){
+					var uniq = uniqueData();
+					file.handle = uniq;
+					fileReader = new FileReader();
+					fileReader.onload = (function(file) {
+						return function(e) {
+							 var Handler = [];
+							 file.src  = this.result;
+							 Handler.push(file);
+							 if(typeof base.options.thumb == 'function'){
+								base.options.thumb.call(target,Handler);
+							 }
+						};
+					})(file);
+					fileReader.readAsDataURL(file);
+					fileArr.push(file);
+				}else{
+					errorResp = 'file '+file.name+' id('+index+') is not a valid image file';
+					parseError(base.options.error, errorResp);
+				}
+			}
+		}
+		
+		callPreview = function(){
+					resp = { fileinfo: fileArr, error: errorArr};
+					resp.count = resp.fileinfo.length;
+					parsePreview(base.options.preview, resp);
+					if(typeof base.options.error == 'function')
+						base.error();
+		}
+		
 		traverseFiles = function(files){
 			if(files.length <= maxfile){
-				var len = 0;
-				$.each(files, function(index, file) {
-					
-					if(base.isImage(file)){
-						len++;
-						var uniq = uniqueData();
-						file.handle = uniq;
-						fileReader = new FileReader();
-						fileReader.onload = (function(file) {
-							return function(e) { 
-								file.src = this.result;
-							};
-						})(files[index]);
-						fileReader.readAsDataURL(file);
-						fileArr.push(file);
-					}else{
-						errorResp = 'file '+file.name+' id('+index+') is not a valid image file';
-						parseError(base.options.error, errorResp);
-					}
-				});
-				resp = { fileinfo: fileArr, error: errorArr};
-				resp.count = resp.fileinfo.length;
-				parsePreview(base.options.preview, resp);
-				if(typeof base.options.error == 'function')
-					base.error();
+				createWriter(files);
+				callPreview();
 				}
 			else{
 				errorResp = "Maximum "+maxfile+" files are allowed";
@@ -276,6 +286,7 @@
 			}
 		}
 		
+		
 		base.upload = function(arg){
 			if(typeof resp != 'undefined' && resp.count)
 			{
@@ -328,6 +339,8 @@
     };
     
     $.fn.bhs_uploader = function(options){
+		
+		
 		var args = Array.prototype.slice.call(arguments, 1);
         return this.each(function(){
 				var item = $(this), instance = item.data('bhs_uploader');
