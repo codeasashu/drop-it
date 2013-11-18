@@ -4,6 +4,8 @@ Drop-it!
 Now drop your favorite images right into web browser with great ease. 
 Just include the plugin and start using it right away
 
+Check out the [demo](http://makefbcovers.com/demos/drag "Dropt It! Demo")
+
 Please refer to the following steps to start using it.
 
 Basic usage:
@@ -12,9 +14,7 @@ Basic usage:
 The basic usage of the plugin start with only a single line of code.
 
 `````javascript
-<script type="text/javascript">
  $('#drop-target').bhs_uploader(); //Just a single line
-</script>
 `````
 
 This will make a division wirh id "drop-target" to be droppable. 
@@ -164,6 +164,34 @@ Since there can be multiple files of same name and size, even of same __data sou
 then you definitely need some unique. Here comes the role of `handle` object.
 
 It comes with the array of file information, which you can use as file identifier.
+
+## 7. thumb
+
+This option gives flexibility to get the instant data for each uploaded file individually. 
+The basic purpose of introduction of this option was to overcome the __HTML FileReader__ `onloadcomplete` event.
+The `process` option gets all the file details **prematurely** i.e, before the __HTML FileReader__ `onloadcomplete` 
+event is still in process. 
+
+However, if you use the `process` method by explicit method, you will get the data. Hence, this option is
+introduced which will not be called **prematurely**. This option will return the data of uplaoded files along
+with primitive details. Hence, you can now utilize this function to process all uploaded files.
+
+> For the drawback of `process` function that we have just noted, you can still use the option to call any
+of your callbacks when you are finished uploading. 
+
+#### Useage:
+`````javascript
+  $('#drop-target').bhs_uploader({
+          thumb : function(data){   
+          				//Use data[0] instead 
+          				var file = data[0];
+          				console.log("File Handle: "+file.handle);
+					console.log("File Name: "+file.name);
+					console.log("File Size: "+file.size);
+					console.log("File Data: "+file.src);
+				}
+			}); 
+`````
 
 ## 7. error
 
