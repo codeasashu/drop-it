@@ -4,7 +4,7 @@ Drop-it!
 Now drop your favorite images right into web browser with great ease. 
 Just include the plugin and start using it right away
 
-Check out the [demo](http://makefbcovers.com/demos/drag "Dropt It! Demo")
+[Check out the demo](http://makefbcovers.com/demos/drag "Dropt It! Demo")
 
 Please refer to the following steps to start using it.
 
