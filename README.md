@@ -17,7 +17,7 @@ The basic usage of the plugin start with only a single line of code.
  $('#drop-target').bhs_uploader(); //Just a single line
 `````
 
-This will make a division wirh id "drop-target" to be droppable. 
+This will make a division with id `drop-target` to be droppable. 
 
 Currently, the plguin supports following options and method.
 
@@ -182,18 +182,18 @@ of your callbacks when you are finished uploading.
 #### Useage:
 `````javascript
   $('#drop-target').bhs_uploader({
-          thumb : function(data){   
-          				//Use data[0] instead 
-          				var file = data[0];
-          				console.log("File Handle: "+file.handle);
-					console.log("File Name: "+file.name);
-					console.log("File Size: "+file.size);
-					console.log("File Data: "+file.src);
+          thumb : function(data){
+          		//Use data[0] instead 
+          		var file = data[0];
+		  		console.log("File Handle: "+file.handle);
+				console.log("File Name: "+file.name);
+				console.log("File Size: "+file.size);
+				console.log("File Data: "+file.src);
 				}
 			}); 
 `````
 
-## 7. error
+## 8. error
 
 Finally this option is all that left. This allows you to print any errors after the files been dropped.
 you can know if there is some kind of invalid file that is dropped, or bumps in between. It will come handy
@@ -287,7 +287,7 @@ var arg = {
         console.log('Current file\'s handle: '+data[0].handle);
         console.log('Current file\'s progress: '+ data.progress); //Note here the use of *data* not *data[0]*
         //Now we have the handle, you can apply the progress to the particular file as
-        $('.file-selector['data-handle='+data[0].handle+']').html('<p>This file got'+data.progress+' % progresses');
+        $('.file-selector[data-handle='+data[0].handle+']').html('<p>This file got'+data.progress+' % progresses');
     }
 }
 //Now upload the files
