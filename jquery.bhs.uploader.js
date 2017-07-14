@@ -2,7 +2,7 @@
  * Drop-it v1.0.0 
  * Licensed under http://www.apache.org/licenses/LICENSE-2.0
  *
- * Developed by HellCoderz | www.makefbcoverscom
+ * Developed by Ashutosh Ch. | https://codeasashu.github.io
  */
  
 (function($){
